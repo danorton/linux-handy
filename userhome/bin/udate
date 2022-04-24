@@ -1,1 +1,10 @@
-/bin/date -u '+%Y-%m-%dT%H:%M:%S+00:00'
+_fmt='+%Y-%m-%dT%H:%M:%S.%3N+00:00'
+if /bin/date --version 1> /dev/null 2>&1 ; then
+  /bin/date -u "$_fmt" 
+else
+  if which gdate > /dev/null ; then
+    $(which gdate) -u "$_fmt"
+  else
+    /bin/date -u '+%Y-%m-%dT%H:%M:%S+00:00'
+  fi
+fi
